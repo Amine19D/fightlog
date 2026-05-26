@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth
-from app.routers import seances
+from app.routers import auth, seances, users, clubs, programmes
 
 app = FastAPI(
     title="FightLog API",
@@ -19,6 +18,9 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(seances.router)
+app.include_router(users.router)
+app.include_router(clubs.router)
+app.include_router(programmes.router)
 
 @app.get("/")
 async def root():
