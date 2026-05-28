@@ -2,28 +2,23 @@
 __pycache__/
 *.py[cod]
 *.pyo
-.venv/
+.env
 venv/
-*.egg-info/
-dist/
-build/
+.venv/
 
 # Node
 node_modules/
 dist/
-.next/
-
-# Environnement
-.env
-*.env.local
+.vite/
+*.local
 
 # Docker
-*.log
+.docker/
 
 # OS
 .DS_Store
-Thumbs.db
+*.log
 
 # IDE
-.vscode/settings.json
+.vscode/
 .idea/
