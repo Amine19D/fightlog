@@ -16,6 +16,8 @@ export default function Navbar() {
       <div style={styles.links}>
         <Link to="/dashboard" style={styles.link}>Dashboard</Link>
         <Link to="/seances" style={styles.link}>Séances</Link>
+        <Link to="/clubs" style={styles.link}>Clubs</Link>
+        <Link to="/programmes" style={styles.link}>Programmes</Link>
         <Link to="/profile" style={styles.link}>Profil</Link>
         <span style={styles.user}>{user?.prenom}</span>
         <button onClick={handleLogout} style={styles.logout}>Déconnexion</button>

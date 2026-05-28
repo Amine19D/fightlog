@@ -6,6 +6,8 @@ import Register from "./pages/Register"
 import Dashboard from "./pages/Dashboard"
 import Seances from "./pages/Seances"
 import Profile from "./pages/Profile"
+import Clubs from "./pages/Clubs"
+import Programmes from "./pages/Programmes"
 
 function PrivateRoute({ children }) {
   const { token, loading } = useAuth()
@@ -25,6 +27,8 @@ function AppRoutes() {
           <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/seances" element={<PrivateRoute><Seances /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/clubs" element={<PrivateRoute><Clubs /></PrivateRoute>} />
+          <Route path="/programmes" element={<PrivateRoute><Programmes /></PrivateRoute>} />
           <Route path="*" element={<Navigate to={token ? "/dashboard" : "/login"} />} />
         </Routes>
       </div>

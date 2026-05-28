@@ -1,16 +1,72 @@
-# React + Vite
+# 🥊 FightLog
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application web de suivi d'entraînement pour sports de combat.
 
-Currently, two official plugins are available:
+## Stack technique
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Backend** : FastAPI (Python 3.12)
+- **Frontend** : React + Vite
+- **Base de données SQL** : PostgreSQL 16
+- **Base de données NoSQL** : MongoDB 7
+- **Authentification** : JWT
+- **Conteneurisation** : Docker + Docker Compose
 
-## React Compiler
+## Lancer le projet
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prérequis
 
-## Expanding the ESLint configuration
+- Docker Desktop installé et lancé
+- Node.js 20+
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Cloner le repo
+
+```bash
+git clone https://github.com/Amine19D/fightlog.git
+cd fightlog
+```
+
+### 2. Créer le fichier .env
+
+```bash
+cp .env.example .env
+```
+
+### 3. Lancer les services (backend + bases de données)
+
+```bash
+docker compose up
+```
+
+### 4. Lancer le frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 5. Accéder à l'application
+
+- **Frontend** : http://localhost:5173
+- **API Swagger** : http://localhost:8000/docs
+
+## Comptes de démonstration
+
+| Email             | Mot de passe | Rôle    |
+| ----------------- | ------------ | ------- |
+| test@fightlog.com | Test1234     | athlete |
+
+## Variables d'environnement
+
+| Variable     | Description     |
+| ------------ | --------------- |
+| DATABASE_URL | URL PostgreSQL  |
+| MONGO_URL    | URL MongoDB     |
+| SECRET_KEY   | Clé secrète JWT |
+
+## Architecture
+
+- `backend/` — API FastAPI avec routers auth, séances, users, clubs, programmes
+- `frontend/` — Application React avec pages Login, Dashboard, Séances, Profil
+- `db/sql/` — Schéma PostgreSQL (tables, vues, triggers, procédures)
+- `docker-compose.yml` — Orchestration des 4 services
