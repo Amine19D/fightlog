@@ -240,3 +240,31 @@ INSERT INTO competition(nom, date, lieu, sport_id, niveau) VALUES
 ('Championnat Paris Boxe 2025', '2025-11-15', 'Paris', 1, 'régional'),
 ('Open MMA Ile-de-France', '2025-12-01', 'Créteil', 2, 'national'),
 ('Tournoi Judo Lyon', '2026-01-20', 'Lyon', 3, 'régional');
+-- ============================================================
+-- REQUETE METIER COMPLEXE : Statistiques des athletes par club
+-- 4 jointures + GROUP BY + HAVING + sous-requete correlee
+-- ============================================================
+/*
+SELECT 
+    u.prenom,
+    u.nom,
+    u.poids_kg,
+    c.nom AS club,
+    s.nom AS sport_principal,
+    COUNT(DISTINCT p.competition_id) AS nb_competitions,
+    SUM(CASE WHEN p.resultat = 'victoire' THEN 1 ELSE 0 END) AS nb_victoires,
+    ROUND(
+        SUM(CASE WHEN p.resultat = 'victoire' THEN 1 ELSE 0 END) * 100.0 
+        / NULLIF(COUNT(DISTINCT p.competition_id), 0), 2
+    ) AS taux_victoire_pct
+FROM utilisateur u
+JOIN inscription i ON i.utilisateur_id = u.id
+JOIN club c ON c.id = i.club_id
+JOIN athlete_sport as2 ON as2.utilisateur_id = u.id
+JOIN sport s ON s.id = as2.sport_id
+LEFT JOIN participation p ON p.utilisateur_id = u.id
+WHERE u.role = 'athlete'
+GROUP BY u.id, u.prenom, u.nom, u.poids_kg, c.nom, s.nom
+HAVING COUNT(DISTINCT p.competition_id) >= 0
+ORDER BY nb_victoires DESC;
+*/
